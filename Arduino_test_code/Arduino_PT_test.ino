@@ -67,7 +67,8 @@ void setup() //setup routine, runs once when system turned on or reset
 
 void loop() //loop routine runs over and over again forever
 {
-  signalValue1 = analogRead(pressureInput1); //reads 8bit value from input pin and assigns to variable
+  analogReadResolution(12);
+  signalValue1 = analogRead(pressureInput1); //reads 12bit value from input pin and assigns to variable
   signalValue2 = analogRead(pressureInput2);
   signalValue3 = analogRead(pressureInput3);
   signalValue4 = analogRead(pressureInput4);
@@ -76,34 +77,34 @@ void loop() //loop routine runs over and over again forever
   signalValue7 = analogRead(pressureInput7);
   signalValue8 = analogRead(pressureInput8);
   Serial.print(signalValue1,3);
-  Serial.println("bit");
+  Serial.print("bit");
   //Serial.print(signalValue8,3);
   //Serial.println("bit");
 
-  pressureVolt1 = (signalValue1*5)/(1023); //transfer 8bit to voltage,arduino voltage input is 0~5v
-  pressureVolt2 = (signalValue2*5)/(1023);
-  pressureVolt3 = (signalValue3*5)/(1023);
-  pressureVolt4 = (signalValue4*5)/(1023);
-  pressureVolt5 = (signalValue5*5)/(1023);
-  pressureVolt6 = (signalValue6*5)/(1023);
-  pressureVolt7 = (signalValue7*5)/(1023);
-  pressureVolt8 = (signalValue8*5)/(1023);
+  pressureVolt1 = (signalValue1*3.3)/(4095); //transfer 12bit to voltage,arduino voltage input is 0~3.3v
+  pressureVolt2 = (signalValue2*3.3)/(4095);
+  pressureVolt3 = (signalValue3*3.3)/(4095);
+  pressureVolt4 = (signalValue4*3.3)/(4095);
+  pressureVolt5 = (signalValue5*3.3)/(4095);
+  pressureVolt6 = (signalValue6*3.3)/(4095);
+  pressureVolt7 = (signalValue7*3.3)/(4095);
+  pressureVolt8 = (signalValue8*3.3)/(4095);
 
   Serial.print(pressureVolt1,3);
-  Serial.println("V"); //prints label to serial
+  Serial.print("V"); //prints label to serial
   // Serial.print(pressureVolt2,3);
   //Serial.println("V");
    //Serial.print(pressureVolt3,3);
   //Serial.println("V");
  
-  P1 = ( (pressureVolt1-voltZero1)*( (pressuretransducermax-pressuretransducermin)/(voltMax1-voltZero1) ) )+1; //conversion equation to convert analog reading to bar
-  P2 = ( (pressureVolt2-voltZero2)*( (pressuretransducermax-pressuretransducermin)/(voltMax2-voltZero2) ) )+1;
-  P3 = ( (pressureVolt3-voltZero3)*( (pressuretransducermax-pressuretransducermin)/(voltMax3-voltZero3) ) )+1;
-  P4 = ( (pressureVolt4-voltZero4)*( (pressuretransducermax-pressuretransducermin)/(voltMax4-voltZero4) ) )+1;
-  P5 = ( (pressureVolt5-voltZero5)*( (pressuretransducermax-pressuretransducermin)/(voltMax5-voltZero5) ) )+1;
-  P6 = ( (pressureVolt6-voltZero6)*( (pressuretransducermax-pressuretransducermin)/(voltMax6-voltZero6) ) )+1;
-  P7 = ( (pressureVolt7-voltZero7)*( (pressuretransducermax-pressuretransducermin)/(voltMax7-voltZero7) ) )+1;
-  P8 = ( (pressureVolt8-voltZero8)*( (pressuretransducermax-pressuretransducermin)/(voltMax8-voltZero8) ) )+1;
+  P1 = ( (pressureVolt1-voltZero1)*( (pressuretransducermax-pressuretransducermin)/(voltMax1-voltZero1) ) ); //conversion equation to convert analog reading to bar
+  P2 = ( (pressureVolt2-voltZero2)*( (pressuretransducermax-pressuretransducermin)/(voltMax2-voltZero2) ) );
+  P3 = ( (pressureVolt3-voltZero3)*( (pressuretransducermax-pressuretransducermin)/(voltMax3-voltZero3) ) );
+  P4 = ( (pressureVolt4-voltZero4)*( (pressuretransducermax-pressuretransducermin)/(voltMax4-voltZero4) ) );
+  P5 = ( (pressureVolt5-voltZero5)*( (pressuretransducermax-pressuretransducermin)/(voltMax5-voltZero5) ) );
+  P6 = ( (pressureVolt6-voltZero6)*( (pressuretransducermax-pressuretransducermin)/(voltMax6-voltZero6) ) );
+  P7 = ( (pressureVolt7-voltZero7)*( (pressuretransducermax-pressuretransducermin)/(voltMax7-voltZero7) ) );
+  P8 = ( (pressureVolt8-voltZero8)*( (pressuretransducermax-pressuretransducermin)/(voltMax8-voltZero8) ) );
   Serial.print(P1, 3); //prints value from previous line to serial
   Serial.println("bar");
   //Serial.print(P2, 3); //prints value from previous line to serial
